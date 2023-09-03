@@ -32,6 +32,11 @@
     </extensions>
 
     <actions>
-
+        <group id="IdeaPluginDevelopmentLearning.Actions" text="Learning" description="A sample plugin from scratch">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <action class="com.mclebtec.ideaplugindevelopmentlearning.action.HelloActions"
+                    id="IdeaPluginDevelopmentLearning.Actions.HelloActions"
+                    text="Say Hello"/>
+        </group>
     </actions>
 </idea-plugin>
