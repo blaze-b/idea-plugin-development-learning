@@ -9,9 +9,7 @@ import com.intellij.util.ui.UIUtil
 import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.awt.Insets
 import javax.swing.JComponent
-
 import javax.swing.JPanel
 import javax.swing.JPasswordField
 import javax.swing.JTextField
@@ -50,6 +48,7 @@ class DataDialogWrapper : DialogWrapper(true) {
         val password = txtPassword.password
         println("Mode: $mode, Username: $username, Password: $password")
     }
+
     private fun label(text: String): JComponent {
         val label = JBLabel(text)
         label.componentStyle = UIUtil.ComponentStyle.SMALL
