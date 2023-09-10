@@ -14,9 +14,11 @@ class HelloActions : AnAction() {
         println("Inside the action method for performing a part....")
         //showFileDialog(e)
         //getUserName(e)
-        if (DataDialogWrapper().showAndGet()) {
+        val dataDialogWrapper = DataDialogWrapper()
+        if (dataDialogWrapper.showAndGet()) {
             //user had pressed ok
             println("Successfully pressed ok")
+            dataDialogWrapper.close(23)
         }
     }
 

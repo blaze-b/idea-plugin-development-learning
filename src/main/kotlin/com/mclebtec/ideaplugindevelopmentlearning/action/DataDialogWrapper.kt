@@ -1,5 +1,8 @@
 package com.mclebtec.ideaplugindevelopmentlearning.action
 
+import com.intellij.credentialStore.CredentialAttributes
+import com.intellij.credentialStore.Credentials
+import com.intellij.ide.passwordSafe.PasswordSafe
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.components.JBLabel
 import com.intellij.uiDesigner.core.AbstractLayout
@@ -24,6 +27,19 @@ class DataDialogWrapper : DialogWrapper(true) {
     init {
         init()
         title = "Idea Demo Learning"
+        val state = DataSettings.getInstance().state
+        if (state != null) {
+            txtMode.text = state.mode
+        }
+        try {
+            val credentialAttributes = CredentialAttributes("IdeaPluginDevelopmentLearning")
+            val credentials = PasswordSafe.instance.get(credentialAttributes)
+            txtPassword.text = credentials?.getPasswordAsString()
+            txtUsername.text = credentials?.userName
+        } catch (e: Exception) {
+            println(e.message)
+        }
+
     }
 
     override fun createCenterPanel(): JComponent? {
@@ -47,6 +63,12 @@ class DataDialogWrapper : DialogWrapper(true) {
         val username = txtUsername.text
         val password = txtPassword.password
         println("Mode: $mode, Username: $username, Password: $password")
+        val state = DataSettings.getInstance().state
+        state?.mode = mode
+        val credentialAttributes = CredentialAttributes("IdeaPluginDevelopmentLearning",
+                "mykey")
+        val credentials = Credentials(username, password)
+        PasswordSafe.instance.set(credentialAttributes, credentials)
     }
 
     private fun label(text: String): JComponent {
